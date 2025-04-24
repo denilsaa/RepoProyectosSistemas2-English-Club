@@ -1,0 +1,30 @@
+{% extends 'publico/base.html' %}
+{% block title %}Seleccionar Tipo de Usuario{% endblock %}
+
+{% block content %}
+<section class="p-10 max-w-3xl mx-auto text-center">
+  <h1 class="text-3xl font-bold text-blue-900 mb-8">¿Qué tipo de usuario deseas crear?</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <a href="{% url 'crear_usuario_por_rol' 'docente' %}" class="bg-white border border-blue-200 rounded-xl shadow p-6 hover:bg-blue-50 transition">
+      <div class="text-5xl mb-2">👩‍🏫</div>
+      <p class="text-lg font-semibold text-blue-800">Docente</p>
+    </a>
+
+    <a href="{% url 'crear_usuario_por_rol' 'secretaria' %}" class="bg-white border border-blue-200 rounded-xl shadow p-6 hover:bg-blue-50 transition">
+      <div class="text-5xl mb-2">👩‍💼</div>
+      <p class="text-lg font-semibold text-blue-800">Secretaria</p>
+    </a>
+
+    <a href="{% url 'crear_usuario_por_rol' 'estudiante' %}" class="bg-white border border-blue-200 rounded-xl shadow p-6 hover:bg-blue-50 transition">
+      <div class="text-5xl mb-2">👨‍👩‍👧</div>
+      <p class="text-lg font-semibold text-blue-800">Estudiante/Padre</p>
+    </a>
+
+    <a href="{% url 'crear_usuario_por_rol' 'directivo' %}" class="bg-white border border-blue-200 rounded-xl shadow p-6 hover:bg-blue-50 transition">
+      <div class="text-5xl mb-2">👑</div>
+      <p class="text-lg font-semibold text-blue-800">Directivo</p>
+    </a>
+  </div>
+</section>
+{% endblock %}

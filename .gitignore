@@ -1,0 +1,45 @@
+# === ENTORNO VIRTUAL ===
+env/
+
+# === PYTHON ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pyt
+*.py~
+
+# === BASE DE DATOS LOCAL ===
+*.sqlite3
+
+# === ARCHIVOS DE CONFIGURACIÓN PRIVADOS ===
+.env
+*.env
+
+# === LOGS ===
+*.log
+
+# === MIGRACIONES TEMPORALES (OPCIONAL) ===
+# Si no quieres rastrear migraciones hasta tenerlas estables
+# */migrations/*.py
+# */migrations/*.pyc
+# !*/migrations/__init__.py
+
+# === ARCHIVOS SUBIDOS POR USUARIOS ===
+media/
+
+# === FRONTEND: ASSETS COMPILADOS Y LIBRERÍAS ===
+node_modules/
+*.css.map
+*.js.map
+
+# === ARCHIVOS TEMPORALES DE EDITORES ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === OTROS ===
+.DS_Store
+Thumbs.db
