@@ -77,6 +77,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+#BASE DE DATOS DE DENIL
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
@@ -88,9 +89,51 @@ DATABASES = {
         },
     }
 }
+#BASE DE DATOS DE AILYN
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'mssql',
+        'NAME': 'englishclub',
+        'HOST': 'DESKTOP-RI7UI8N\\SQLEXPRESS',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+            'trusted_connection': 'yes',
+        },
+    }
+}
+"""
 
+#BASE DE DATOS MARIOLY
 
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'mssql',
+        'NAME': 'englishclub',
+        'HOST': 'LAPTOP-M4R1\\SQLEXPRESS',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+            'trusted_connection': 'yes',
+        },
+    }
+}
 
+"""
+#BASE DE DATOS DE LIMBER
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'mssql',
+        'NAME': 'englishclub',
+        'HOST': 'DENIL\\SQLEXPRESS',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+            'trusted_connection': 'yes',
+        },
+    }
+}
+"""
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
