@@ -1,0 +1,93 @@
+{% extends 'publico/base.html' %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+<section class="min-h-screen flex items-center justify-center bg-blue-50">
+    <div class="bg-white rounded-xl shadow-lg grid grid-cols-1 md:grid-cols-2 w-full max-w-4xl overflow-hidden">
+      
+      <!-- Lado izquierdo -->
+      <div class="bg-blue-900 text-white p-10 flex flex-col justify-center">
+        <h2 class="text-3xl font-bold mb-4">Bienvenido de nuevo</h2>
+        <p class="mb-6">Accede a tu cuenta para continuar tu aprendizaje con nosotros.</p>
+        <ul class="list-disc pl-5 space-y-2">
+          <li>✓ Contenido exclusivo para todos los niveles</li>
+          <li>✓ Sistema de seguimiento de progreso</li>
+          <li>✓ Comunicación directa con docentes</li>
+        </ul>
+        <p class="mt-10 text-sm text-gray-200">© 2025 English Club - Todos los derechos reservados</p>
+      </div>
+  
+      <!-- Lado derecho -->
+      <div class="p-10">
+        <h2 class="text-2xl font-bold text-blue-900 mb-6 text-center">Iniciar Sesión</h2>
+        <form method="post" class="space-y-4">
+          {% csrf_token %}
+  
+          <p class="text-sm font-semibold text-gray-700 mb-2">Seleccione su perfil:</p>
+          <div class="grid grid-cols-2 gap-3 mb-4" id="role-selector">
+            <label class="role-option flex items-center justify-center border border-blue-200 rounded-lg py-2 px-3 bg-blue-50 hover:bg-blue-100 cursor-pointer transition">
+              <input type="radio" name="user-type" value="docente" class="hidden" required>
+              <span class="text-blue-800 font-medium">👩‍🏫 Docente</span>
+            </label>
+            <label class="role-option flex items-center justify-center border border-blue-200 rounded-lg py-2 px-3 bg-blue-50 hover:bg-blue-100 cursor-pointer transition">
+              <input type="radio" name="user-type" value="secretaria" class="hidden">
+              <span class="text-blue-800 font-medium">👩‍💼 Secretaria</span>
+            </label>
+            <label class="role-option flex items-center justify-center border border-blue-200 rounded-lg py-2 px-3 bg-blue-50 hover:bg-blue-100 cursor-pointer transition">
+              <input type="radio" name="user-type" value="tutor" class="hidden">
+              <span class="text-blue-800 font-medium">👨‍👩‍👧 Padre/Tutor</span>
+            </label>
+            <label class="role-option flex items-center justify-center border border-blue-200 rounded-lg py-2 px-3 bg-blue-50 hover:bg-blue-100 cursor-pointer transition">
+              <input type="radio" name="user-type" value="estudiante" class="hidden">
+              <span class="text-blue-800 font-medium">🎓 Estudiante</span>
+            </label>
+            <label class="role-option flex items-center justify-center border border-blue-200 rounded-lg py-2 px-3 bg-blue-50 hover:bg-blue-100 cursor-pointer transition">
+              <input type="radio" name="user-type" value="directivo" class="hidden">
+              <span class="text-blue-800 font-medium">👑 Directivo</span>
+            </label>
+          </div>
+          
+          <div>
+            <label for="username" class="block text-sm font-medium text-gray-700">Usuario:</label>
+            <input type="text" name="username" class="w-full border border-gray-300 rounded px-3 py-2" required>
+          </div>
+  
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-700">Contraseña:</label>
+            <input type="password" name="password" class="w-full border border-gray-300 rounded px-3 py-2" required>
+          </div>
+  
+          <div class="flex justify-between items-center">
+            <label class="text-sm text-gray-500">
+              <input type="checkbox" name="remember" class="mr-1"> Recordarme
+            </label>
+            <a href="#" class="text-blue-600 text-sm hover:underline">¿Olvidó su contraseña?</a>
+          </div>
+  
+          <button type="submit" class="w-full bg-blue-800 text-white py-2 rounded hover:bg-blue-900 font-semibold">
+            Iniciar Sesión
+          </button>
+        </form>
+  
+        {% if messages %}
+          <div class="mt-4">
+            {% for message in messages %}
+              <p class="text-red-600 text-sm">{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+</section>
+
+<script>
+  const roleOptions = document.querySelectorAll(".role-option");
+  roleOptions.forEach(option => {
+    option.addEventListener("click", () => {
+      roleOptions.forEach(o => o.classList.remove("ring-2", "ring-blue-500", "bg-blue-200"));
+      option.classList.add("ring-2", "ring-blue-500", "bg-blue-200");
+    });
+  });
+</script>
+{% endblock %}

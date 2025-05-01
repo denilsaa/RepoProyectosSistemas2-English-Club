@@ -17,14 +17,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-# Agregar estas dos líneas:
-from django.conf import settings
-from django.conf.urls.static import static
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('core.urls')),
-]
 
-# Agregar esta línea al final:
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # Público (inicio, quienes somos, servicios, contacto)
+    path('', include('apps.publico.urls')),  
+
+    # Usuarios (login, logout, dashboard directivo)
+    path('usuarios/', include('apps.usuarios.urls')),
+
+    # Demás apps internas
+    path('asignaturas/', include('apps.asignaturas.urls')),
+    path('estudiantes/', include('apps.estudiantes.urls')),
+    path('tutores/', include('apps.tutores.urls')),
+    path('docentes/', include('apps.docentes.urls')),
+    path('secretarias/', include('apps.secretarias.urls')),
+    path('directivos/', include('apps.directivos.urls')),
+    path('inscripciones/', include('apps.inscripciones.urls')),
+    path('notas/', include('apps.notas.urls')),
+    path('asistencia/', include('apps.asistencia.urls')),
+    path('vark/', include('apps.vark.urls')),
+]

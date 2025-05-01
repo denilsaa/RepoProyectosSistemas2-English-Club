@@ -1,0 +1,13 @@
+{% extends 'publico/base.html' %}
+{% block title %}Contacto{% endblock %}
+{% block content %}
+<section class="p-10">
+  <h2 class="text-2xl font-bold text-blue-800 mb-4">Contáctanos</h2>
+  <form class="flex flex-col gap-4 max-w-md">
+    <input type="text" placeholder="Tu nombre" class="border rounded px-4 py-2">
+    <input type="email" placeholder="Correo electrónico" class="border rounded px-4 py-2">
+    <textarea placeholder="Mensaje" class="border rounded px-4 py-2"></textarea>
+    <button type="submit" class="bg-blue-800 text-white py-2 px-4 rounded hover:bg-blue-700">Enviar</button>
+  </form>
+</section>
+{% endblock %}
