@@ -7,6 +7,7 @@ from datetime import date
 import random, string
 from apps.estudiantes.forms import EstudianteFormTecnico, EstudianteFormRegular
 from apps.tutores.forms import TutorForm
+from apps.estudiantes.models import Estudiante
 from apps.usuarios.decorators import solo_directivo
 @solo_directivo
 def crear_estudiante_tecnico(request):
@@ -169,6 +170,21 @@ def estudiante_tutor_registrado(request):
     })
 
 
+#AQUI AGREGUE LA VISTA PARA ESTUDIANTE TECNICO 
+def dashboard_estudiante(request):
+    if request.session.get('rol') != 'estudiante':
+        return redirect('login')
+
+    id_usuario = request.session.get('id_usuario')
+    try:
+        estudiante = Estudiante.objects.get(usuario_id=id_usuario)
+        nombre = f"{estudiante.nombres} {estudiante.apellidos}"
+    except Estudiante.DoesNotExist:
+        nombre = "Estudiante"
+
+    return render(request, 'estudiantes/dashboard_estudiante.html', {'nombre': nombre})
+
+
 def guardar_estudiante_y_usuario(request, data, archivo_path, origen, return_ids=False):
     try:
         fnac = data['fecha_nacimiento']
@@ -242,5 +258,9 @@ def guardar_estudiante_y_usuario(request, data, archivo_path, origen, return_ids
             return None, None
         else:
             return redirect('crear_estudiante_tecnico' if origen == 'tecnico' else 'crear_estudiante_regular')
+        
+    
+
+    
         
         
