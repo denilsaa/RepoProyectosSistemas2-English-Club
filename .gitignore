@@ -1,0 +1,51 @@
+# === ENTORNO VIRTUAL ===
+env/
+
+# === PYTHON: Cachés y archivos compilados ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pyt
+*.py~
+
+# === BASE DE DATOS LOCAL ===
+*.sqlite3
+
+# === ARCHIVOS DE CONFIGURACIÓN PRIVADOS ===
+.env
+*.env
+
+# === LOGS ===
+*.log
+
+# === ARCHIVOS SUBIDOS POR USUARIOS ===
+# Ignora todo media/, excepto la carpeta media/formularios vacía
+media/*
+!media/formularios/
+!media/formularios/.gitkeep
+
+# === MIGRACIONES TEMPORALES (OPCIONAL) ===
+# Si no quieres rastrear migraciones aún, descomenta las líneas siguientes:
+# */migrations/*.py
+# */migrations/*.pyc
+# !*/migrations/__init__.py
+
+# === FRONTEND: ASSETS COMPILADOS Y LIBRERÍAS ===
+node_modules/
+*.css.map
+*.js.map
+
+# === ARCHIVOS TEMPORALES DE EDITORES ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === SISTEMA OPERATIVO ===
+.DS_Store
+Thumbs.db
+
+# === ARCHIVOS ESTÁTICOS ===
+# static/ se incluirá por defecto (no está ignorado)

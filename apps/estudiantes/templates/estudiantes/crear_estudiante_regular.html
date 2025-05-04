@@ -1,0 +1,167 @@
+
+{% extends 'publico/base.html' %}
+{% block title %}Registrar Estudiante Regular{% endblock %}
+
+{% block content %}
+<!-- Bootstrap, Icons y Animate.css -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+<section class="container my-4">
+  <div class="card shadow-lg border-0 animate__animated animate__fadeIn">
+    <div class="card-header p-4 bg-gradient" style="background: #153f68;">
+      <h2 class="card-title text-white mb-0 d-flex align-items-center fw-bold">
+        <i class="bi bi-journal-check fs-3 me-2" style="color: #ffcc33;"></i> 
+        <span class="animate__animated animate__pulse animate__infinite animate__slower">ESTUDIANTE REGULAR - FORMULARIO DE INSCRIPCIÓN</span>
+      </h2>
+    </div>
+
+    <div class="card-body bg-light">
+      <form method="post" enctype="multipart/form-data" id="inscripcionForm" class="needs-validation" novalidate>
+        {% csrf_token %}
+
+        <!-- Fecha, días y horario -->
+        <div class="row mb-4 pb-3 border-bottom" style="border-color: #4a7abc !important;">
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-bold" style="color: #4a7abc;"><i class="bi bi-calendar-date me-1"></i> Fecha</label>
+            <input type="date" class="form-control form-control-lg" value="{{ today|date:'Y-m-d' }}" readonly>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-bold" style="color: #f18f01;"><i class="bi bi-calendar-week me-1"></i> Días</label>
+            <div class="form-control p-2">
+              {% for dia in dias_semana %}
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="dias" value="{{ dia }}" id="dia_{{ forloop.counter }}">
+                <label class="form-check-label" for="dia_{{ forloop.counter }}">{{ dia }}</label>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-bold" style="color: #4a7abc;"><i class="bi bi-clock me-1"></i> Horario</label>
+            <div class="input-group mb-2">
+              <span class="input-group-text bg-primary text-white"><i class="bi bi-box-arrow-in-right"></i></span>
+              <input type="time" class="form-control" name="hora_entrada" id="horaEntrada" required>
+            </div>
+            <div class="input-group">
+              <span class="input-group-text bg-primary text-white"><i class="bi bi-box-arrow-right"></i></span>
+              <input type="time" class="form-control" name="hora_salida" id="horaSalida" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Datos básicos -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label fw-semibold"><i class="bi bi-person-badge me-1 text-primary"></i> Apellidos</label>
+            {{ form.apellidos }}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-semibold"><i class="bi bi-person me-1 text-primary"></i> Nombres</label>
+            {{ form.nombres }}
+          </div>
+          <div class="col-md-4">
+            <label class="form-label fw-semibold"><i class="bi bi-hash text-primary"></i> CI</label>
+            {{ form.ci }}
+          </div>
+          <div class="col-md-4">
+            <label class="form-label fw-semibold"><i class="bi bi-calendar-event text-primary"></i> Fecha de nacimiento</label>
+            {{ form.fecha_nacimiento }}
+          </div>
+          <div class="col-md-4">
+            <label class="form-label fw-semibold"><i class="bi bi-geo-alt text-primary"></i> Dirección</label>
+            {{ form.direccion }}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-semibold"><i class="bi bi-building me-1 text-primary"></i> Colegio</label>
+            {{ form.colegio }}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-semibold"><i class="bi bi-people me-1 text-primary"></i> Grupo</label>
+            {{ form.grupo }}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-semibold"><i class="bi bi-phone me-1 text-primary"></i> Celular</label>
+            {{ form.numero }}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-semibold"><i class="bi bi-envelope me-1 text-primary"></i> Correo</label>
+            {{ form.correo }}
+          </div>
+        </div>
+
+        <!-- Sección de inscripción -->
+        <div class="row g-3 mb-4 border-top pt-4">
+          <div class="col-md-6">
+            <label class="form-label fw-semibold"><i class="bi bi-megaphone text-warning"></i> Medio de referencia</label>
+            {{ form.medio_referencia }}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-semibold"><i class="bi bi-journal-text text-warning"></i> Tipo de inscripción</label>
+            {{ form.tipo_inscripcion }}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-semibold"><i class="bi bi-cash-coin text-warning"></i> Forma de pago</label>
+            {{ form.forma_pago }}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-semibold"><i class="bi bi-calendar-check text-warning"></i> Fecha de pago</label>
+            {{ form.fecha_pago }}
+          </div>
+          <div class="col-md-12">
+            <label class="form-label fw-semibold"><i class="bi bi-file-earmark-arrow-up text-warning"></i> Formulario escaneado</label>
+            {{ form.archivo_formulario }}
+          </div>
+        </div>
+
+        <!-- Botón de envío -->
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-lg px-5 py-3 shadow-lg animate__animated animate__pulse animate__infinite animate__slower" style="background-color: #4a7abc; color: white;" id="submitBtn">
+            <i class="bi bi-send-check-fill me-2" style="color: #ffcc33;"></i> REGISTRAR ESTUDIANTE
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  body {
+    background: linear-gradient(to right, #e3edf7, #f6fbff);
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .form-label {
+    font-weight: 600;
+  }
+
+  .form-control {
+    border-radius: 0.375rem;
+  }
+
+  .form-check-input:checked {
+    background-color: #1a3b68;
+    border-color: #1a3b68;
+  }
+
+  .form-check-label {
+    font-weight: 500;
+  }
+
+  .btn:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 0.25rem rgba(26, 59, 104, 0.25) !important;
+  }
+
+  .card {
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  #submitBtn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(74, 122, 188, 0.4);
+  }
+</style>
+{% endblock %}

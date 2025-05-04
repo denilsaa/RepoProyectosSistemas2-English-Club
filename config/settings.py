@@ -62,8 +62,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-#BASE DE DATOS DE 
-"""""
+
+
+""""
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
@@ -75,7 +76,8 @@ DATABASES = {
         },
     }
 }
-"""""
+""""
+
 #BASE DE DATOS DE AILYN
 """
 DATABASES = {
@@ -93,7 +95,6 @@ DATABASES = {
 
 #BASE DE DATOS MARIOLY
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
@@ -105,6 +106,7 @@ DATABASES = {
         },
     }
 }
+
 
 #BASE DE DATOS DE LIMBER
 """

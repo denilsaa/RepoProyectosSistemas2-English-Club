@@ -1,0 +1,610 @@
+
+{% extends 'publico/base.html' %}
+{% block title %}Registrar Estudiante Técnico Superior{% endblock %}
+
+{% block content %}
+<!-- Incluir Bootstrap CSS, Bootstrap Icons y animaciones -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+<section class="container my-4">
+  <div class="card shadow-lg border-0 animate__animated animate__fadeIn">
+    <!-- Header con el azul oscuro especificado -->
+    <div class="card-header p-4 bg-gradient" style="background: #1a3b68;">
+      <h2 class="card-title text-white mb-0 d-flex align-items-center fw-bold">
+        <i class="bi bi-clipboard-check fs-3 me-2" style="color: #ffcc33;"></i> 
+        <span class="animate__animated animate__pulse animate__infinite animate__slower">TÉCNICO SUPERIOR - FORMULARIO DE INSCRIPCIÓN</span>
+      </h2>
+    </div>
+    
+    <div class="card-body bg-light">
+      <!-- Horarios y Fechas -->
+      <div class="row mb-4 pb-3 border-bottom" style="border-color: #4a7abc !important;">
+        <div class="col-md-4 mb-3">
+          <div class="bg-white rounded shadow-sm p-3 h-100">
+            <label class="form-label fw-bold" style="color: #4a7abc;">
+              <i class="bi bi-calendar-date me-1"></i> Fecha
+            </label>
+            <input type="date" class="form-control form-control-lg" style="border-color: #4a7abc;" value="{{ today|date:'Y-m-d' }}" readonly>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="bg-white rounded shadow-sm p-3 h-100">
+            <label class="form-label fw-bold" style="color: #f18f01;">
+              <i class="bi bi-calendar-week me-1"></i> Días
+            </label>
+            <div style="font-size: 1.25rem;"> <!-- Tamaño grande como el select-lg -->
+              <label style="display: block; margin-bottom: 0.5rem; color: #f18f01;">Días:</label>
+            
+              <div>
+                <input type="checkbox" id="lunes" name="dias" value="Lunes">
+                <label for="lunes">Lunes</label>
+              </div>
+            
+              <div>
+                <input type="checkbox" id="martes" name="dias" value="Martes">
+                <label for="martes">Martes</label>
+              </div>
+            
+              <div>
+                <input type="checkbox" id="miércoles" name="dias" value="Miércoles">
+                <label for="miércoles">Miércoles</label>
+              </div>
+            
+              <div>
+                <input type="checkbox" id="jueves" name="dias" value="Jueves">
+                <label for="jueves">Jueves</label>
+              </div>
+            
+              <div>
+                <input type="checkbox" id="viernes" name="dias" value="Viernes">
+                <label for="viernes">Viernes</label>
+              </div>
+            
+              <div>
+                <input type="checkbox" id="sábado" name="dias" value="Sábado">
+                <label for="sábado">Sábado</label>
+              </div>
+            </div>
+            
+            <div class="selected-days mt-2" id="selectedDays"></div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="bg-white rounded shadow-sm p-3 h-100">
+            <label class="form-label fw-bold" style="color: #4a7abc;">
+              <i class="bi bi-clock me-1"></i> Horario
+            </label>
+            <div class="row g-2">
+              <div class="col-6">
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #4a7abc; color: white;"><i class="bi bi-box-arrow-in-right"></i></span>
+                  <input type="time" name="hora_entrada" class="form-control" style="border-color: #4a7abc;" id="horaEntrada" placeholder="Entrada">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #4a7abc; color: white;"><i class="bi bi-box-arrow-right"></i></span>
+                  <input type="time" name="hora_salida" class="form-control" style="border-color: #4a7abc;" id="horaSalida" placeholder="Salida">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario Principal -->
+      <form method="post" enctype="multipart/form-data" id="inscripcionForm" class="needs-validation" novalidate>
+        {% csrf_token %}
+
+        <!-- Datos Personales con fondo de tarjeta -->
+        <div class="card mb-4 border-0 shadow-sm">
+          <div class="card-header" style="background-color: #f18f01; color: white;">
+            <h3 class="h5 mb-0">
+              <i class="bi bi-person-vcard me-2" style="color: #ffcc33;"></i> Datos Personales
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label"><i class="bi bi-person me-1" style="color: #4a7abc;"></i> Apellidos</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #f18f01; color: white;"><i class="bi bi-pencil"></i></span>
+                  {{ form.apellidos|safe }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label"><i class="bi bi-person me-1" style="color: #4a7abc;"></i> Nombres</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #f18f01; color: white;"><i class="bi bi-pencil"></i></span>
+                  {{ form.nombres|safe }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label"><i class="bi bi-card-text me-1" style="color: #4a7abc;"></i> C.I.</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #f18f01; color: white;"><i class="bi bi-hash"></i></span>
+                  {{ form.ci|safe }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label"><i class="bi bi-calendar-heart me-1" style="color: #4a7abc;"></i> Fecha de nacimiento</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #f18f01; color: white;"><i class="bi bi-calendar"></i></span>
+                  {{ form.fecha_nacimiento|safe }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label"><i class="bi bi-briefcase me-1" style="color: #4a7abc;"></i> Ocupación</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #f18f01; color: white;"><i class="bi bi-person-workspace"></i></span>
+                  {{ form.ocupacion|safe }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Información de Contacto -->
+        <div class="card mb-4 border-0 shadow-sm">
+          <div class="card-header" style="background-color: #4a7abc; color: white;">
+            <h3 class="h5 mb-0">
+              <i class="bi bi-telephone me-2" style="color: #ffcc33;"></i> Información de Contacto
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label"><i class="bi bi-person-badge me-1" style="color: #4a7abc;"></i> Tipo estudiante</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #4a7abc; color: white;"><i class="bi bi-mortarboard"></i></span>
+                  {{ form.tipo_estudiante|safe }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label"><i class="bi bi-geo-alt me-1" style="color: #4a7abc;"></i> Dirección de Domicilio</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #4a7abc; color: white;"><i class="bi bi-house-door"></i></span>
+                  {{ form.direccion|safe }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label"><i class="bi bi-whatsapp me-1" style="color: #4a7abc;"></i> WhatsApp</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #4a7abc; color: white;"><i class="bi bi-chat"></i></span>
+                  {{ form.numero|safe }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label"><i class="bi bi-phone me-1" style="color: #4a7abc;"></i> Celular Referencia</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #4a7abc; color: white;"><i class="bi bi-telephone"></i></span>
+                  {{ form.celular_referencia|safe }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label"><i class="bi bi-envelope me-1" style="color: #4a7abc;"></i> Correo</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #4a7abc; color: white;"><i class="bi bi-at"></i></span>
+                  {{ form.correo|safe }}
+                </div>
+              </div>
+              <div class="col-md-12">
+                <label class="form-label"><i class="bi bi-envelope-check me-1" style="color: #4a7abc;"></i> Correo Referencia</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #4a7abc; color: white;"><i class="bi bi-envelope"></i></span>
+                  {{ form.correo_referencia|safe }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Datos Académicos -->
+        <div class="card mb-4 border-0 shadow-sm">
+          <div class="card-header" style="background-color: #1a3b68; color: white;">
+            <h3 class="h5 mb-0">
+              <i class="bi bi-book me-2" style="color: #ffcc33;"></i> Datos Académicos
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label"><i class="bi bi-journals me-1" style="color: #4a7abc;"></i> Estudios anteriores en inglés</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #1a3b68; color: white;"><i class="bi bi-book"></i></span>
+                  {{ form.estudios_ingles_previos|safe }}
+                </div>
+              </div>
+              <div class="col-12">
+                <label class="form-label"><i class="bi bi-building me-1" style="color: #4a7abc;"></i> Institución en la que estudia o trabaja</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #1a3b68; color: white;"><i class="bi bi-bank"></i></span>
+                  {{ form.institucion_actual|safe }}
+                </div>
+              </div>
+              <div class="col-12">
+                <label class="form-label"><i class="bi bi-question-circle me-1" style="color: #4a7abc;"></i> Aprenderá inglés por motivos</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #1a3b68; color: white;"><i class="bi bi-list-check"></i></span>
+                  {{ form.motivo_estudio|safe }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inscripción -->
+        <div class="card mb-4 border-0 shadow-sm">
+          <div class="card-header" style="background-color: #f18f01; color: white;">
+            <h3 class="h5 mb-0">
+              <i class="bi bi-pencil-square me-2" style="color: #ffcc33;"></i> Inscripción
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label"><i class="bi bi-megaphone me-1" style="color: #4a7abc;"></i> ¿Cómo se enteró?</label>
+                <select name="medio_referencia" class="form-select form-select-lg" id="referenciaSelect" style="border-color: #4a7abc;">
+                  <option value="">Seleccione una opción</option>
+                  <option value="facebook" data-icon="facebook">Facebook</option>
+                  <option value="recomendacion" data-icon="people">Recomendación</option>
+                  <option value="tv" data-icon="broadcast">TV/Radio/Periódico</option>
+                  <option value="otros" data-icon="three-dots">Otros</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label"><i class="bi bi-card-checklist me-1" style="color: #4a7abc;"></i> Tipo de inscripción</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #f18f01; color: white;"><i class="bi bi-clipboard-check"></i></span>
+                  {{ form.tipo_inscripcion|safe }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label"><i class="bi bi-cash-coin me-1" style="color: #4a7abc;"></i> Forma de pago</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #f18f01; color: white;"><i class="bi bi-credit-card"></i></span>
+                  {{ form.forma_pago|safe }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label"><i class="bi bi-calendar-check me-1" style="color: #4a7abc;"></i> Fecha de pago</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="background-color: #f18f01; color: white;"><i class="bi bi-calendar-event"></i></span>
+                  {{ form.fecha_pago|safe }}
+                </div>
+              </div>
+
+              <div class="col-12 mt-3">
+                <label class="form-label"><i class="bi bi-file-earmark-arrow-up me-1" style="color: #4a7abc;"></i> Formulario escaneado</label>
+                <div class="input-group input-group-lg">
+                  <span class="input-group-text" style="background-color: #f18f01; color: white;"><i class="bi bi-upload"></i></span>
+                  {{ form.archivo_formulario|safe }}
+                  <button type="button" class="btn" style="border-color: #f18f01; color: #f18f01;" id="clearFile" style="display: none">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+                <div class="file-preview mt-2 p-2 rounded" id="filePreview">
+                  <div class="d-flex align-items-center">
+                    <i class="bi bi-file-earmark-text me-2" style="color: #4a7abc; font-size: 1.5rem;"></i>
+                    <span class="file-name" id="fileName"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botón de envío con animación -->
+        <div class="text-center mt-4">
+          <div class="d-inline-block position-relative">
+            <button type="submit" class="btn btn-lg px-5 py-3 shadow-lg animate__animated animate__pulse animate__infinite animate__slow" style="background-color: #4a7abc; color: white;" id="submitBtn">
+              <i class="bi bi-check-circle-fill me-2" style="color: #ffcc33;"></i> REGISTRAR ESTUDIANTE
+            </button>
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="z-index: -1; transform: scale(1.1);">
+              <div class="position-absolute top-0 start-0 w-100 h-100 rounded-pill" style="background-color: #1a3b68; opacity: 0.25; filter: blur(10px);"></div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Incluir Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Inicialización de Bootstrap Tooltips
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    // Mejoras en selección de días usando Bootstrap Badges
+    const diasSelect = document.getElementById('diasSelect');
+    const selectedDaysContainer = document.getElementById('selectedDays');
+    
+    if (diasSelect) {
+      // Usar evento de Bootstrap para el cambio
+      $(diasSelect).on('change', updateSelectedDays);
+      
+      function updateSelectedDays() {
+        selectedDaysContainer.innerHTML = '';
+        
+        for (let option of diasSelect.options) {
+          if (option.selected) {
+            // Crear badge de Bootstrap
+            const tag = document.createElement('span');
+            tag.className = 'badge me-1 mb-1 p-2 animate__animated animate__fadeIn';
+            tag.style.backgroundColor = '#f18f01';
+            tag.innerHTML = `${option.text} <i class="bi bi-check-circle-fill ms-1" style="color: #ffcc33;"></i>`;
+            
+            // Botón de eliminar integrado con Bootstrap
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'btn-close btn-close-white ms-1';
+            removeBtn.setAttribute('aria-label', 'Remove');
+            removeBtn.style.fontSize = '0.65rem';
+            removeBtn.onclick = function(e) {
+              e.preventDefault();
+              option.selected = false;
+              // Animar salida
+              tag.classList.remove('animate__fadeIn');
+              tag.classList.add('animate__fadeOut');
+              setTimeout(() => updateSelectedDays(), 500);
+            };
+            
+            tag.appendChild(removeBtn);
+            selectedDaysContainer.appendChild(tag);
+          }
+        }
+      }
+    }
+    
+    // Validación de horarios con feedback de Bootstrap
+    const horaEntrada = document.getElementById('horaEntrada');
+    const horaSalida = document.getElementById('horaSalida');
+    
+    if (horaEntrada && horaSalida) {
+      const validateHours = function() {
+        if (horaEntrada.value && horaSalida.value) {
+          if (horaSalida.value <= horaEntrada.value) {
+            // Usar clases de Bootstrap para validación
+            horaSalida.classList.add('is-invalid');
+            
+            // Crear feedback de Bootstrap si no existe
+            let feedback = horaSalida.nextElementSibling;
+            if (!feedback || !feedback.classList.contains('invalid-feedback')) {
+              feedback = document.createElement('div');
+              feedback.className = 'invalid-feedback';
+              horaSalida.parentNode.appendChild(feedback);
+            }
+            feedback.textContent = 'La hora de salida debe ser posterior a la hora de entrada';
+          } else {
+            horaSalida.classList.remove('is-invalid');
+            horaSalida.classList.add('is-valid');
+            const feedback = horaSalida.nextElementSibling;
+            if (feedback && feedback.classList.contains('invalid-feedback')) {
+              feedback.remove();
+            }
+          }
+        }
+      };
+      
+      horaEntrada.addEventListener('change', validateHours);
+      horaSalida.addEventListener('change', validateHours);
+    }
+    
+    // Gestión de archivos con UI mejorada
+    const fileInput = document.querySelector('input[type="file"]');
+    const filePreview = document.getElementById('filePreview');
+    const fileName = document.getElementById('fileName');
+    const clearFile = document.getElementById('clearFile');
+    
+    if (fileInput && filePreview && fileName && clearFile) {
+      fileInput.addEventListener('change', function() {
+        if (this.files.length > 0) {
+          const file = this.files[0];
+          // Mostrar con animación
+          filePreview.classList.add('animate__animated', 'animate__fadeIn');
+          
+          // Determinar icono según tipo de archivo
+          let fileIcon = 'bi-file-earmark';
+          if (file.type.includes('pdf')) fileIcon = 'bi-file-earmark-pdf';
+          else if (file.type.includes('image')) fileIcon = 'bi-file-earmark-image';
+          else if (file.type.includes('word')) fileIcon = 'bi-file-earmark-word';
+          
+          // Mostrar detalles del archivo con Bootstrap
+          fileName.innerHTML = `
+            <strong>${file.name}</strong> 
+            <span class="badge" style="background-color: #4a7abc;">${formatFileSize(file.size)}</span>
+          `;
+          
+          // Actualizar UI
+          clearFile.style.display = 'inline-block';
+          filePreview.classList.add('bg-light', 'border');
+          filePreview.style.borderColor = '#4a7abc';
+        } else {
+          resetFileInput();
+        }
+      });
+      
+      clearFile.addEventListener('click', function() {
+        fileInput.value = '';
+        
+        // Animar la eliminación
+        filePreview.classList.add('animate__fadeOut');
+        setTimeout(() => {
+          resetFileInput();
+          filePreview.classList.remove('animate__fadeOut');
+        }, 300);
+      });
+      
+      function resetFileInput() {
+        fileName.innerHTML = '';
+        clearFile.style.display = 'none';
+        filePreview.classList.remove('bg-light', 'border', 'animate__animated', 'animate__fadeIn');
+      }
+      
+      function formatFileSize(bytes) {
+        if (bytes < 1024) return bytes + ' bytes';
+        else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+        else return (bytes / 1048576).toFixed(1) + ' MB';
+      }
+    }
+    
+    // Validación del formulario con Bootstrap
+    const form = document.getElementById('inscripcionForm');
+    if (form) {
+      // Usar validación nativa de Bootstrap
+      form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+          
+          // Encontrar el primer campo con error y desplazarse a él
+          const firstInvalid = form.querySelector(':invalid');
+          if (firstInvalid) {
+            firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Efecto de atención
+            firstInvalid.classList.add('animate__animated', 'animate__headShake');
+            setTimeout(() => {
+              firstInvalid.classList.remove('animate__animated', 'animate__headShake');
+            }, 1000);
+          }
+        } else {
+          // Animación para el botón al enviar
+          const submitBtn = document.getElementById('submitBtn');
+          submitBtn.innerHTML = '<i class="spinner-border spinner-border-sm me-2"></i> Procesando...';
+          submitBtn.disabled = true;
+        }
+        
+        form.classList.add('was-validated');
+      });
+      
+      // Validar correos electrónicos
+      const emailFields = form.querySelectorAll('input[type="email"]');
+      emailFields.forEach(field => {
+        field.addEventListener('input', function() {
+          if (this.value && !validateEmail(this.value)) {
+            this.setCustomValidity('Ingrese un correo válido');
+          } else {
+            this.setCustomValidity('');
+          }
+        });
+      });
+      
+      function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+    }
+    
+    // Mejorar select de referencias con iconos
+    const referenciaSelect = document.getElementById('referenciaSelect');
+    if (referenciaSelect) {
+      referenciaSelect.addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        const iconName = selectedOption.getAttribute('data-icon');
+        
+        if (this.value) {
+          // Mejorar visualmente el select con clase de Bootstrap
+          this.classList.add('border-info', 'fw-bold');
+          this.style.borderColor = '#4a7abc';
+          this.style.color = '#4a7abc';
+          
+          // Cambiar texto con icono si hay selección
+          if (iconName) {
+            this.classList.add('ps-4'); // Padding para el icono
+            
+            // Eliminar icono anterior si existe
+            const oldIcon = this.parentNode.querySelector('.select-icon');
+            if (oldIcon) oldIcon.remove();
+            
+            // Agregar nuevo icono
+            const icon = document.createElement('i');
+            icon.className = `bi bi-${iconName} position-absolute start-0 ms-3 mt-2 select-icon`;
+            icon.style.pointerEvents = 'none';
+            icon.style.color = '#4a7abc';
+            this.parentNode.style.position = 'relative';
+            this.parentNode.appendChild(icon);
+          }
+        } else {
+          this.classList.remove('border-info', 'fw-bold', 'ps-4');
+          this.style.color = '';
+          const oldIcon = this.parentNode.querySelector('.select-icon');
+          if (oldIcon) oldIcon.remove();
+        }
+      });
+    }
+    
+    // Efectos visuales para inputs al focusear
+    document.querySelectorAll('.form-control, .form-select').forEach(input => {
+      input.addEventListener('focus', function() {
+        this.closest('.input-group')?.classList.add('shadow-sm');
+        this.closest('.card')?.classList.add('border');
+        if (this.closest('.card')) {
+          this.closest('.card').style.borderColor = '#1a3b68';
+        }
+      });
+      
+      input.addEventListener('blur', function() {
+        this.closest('.input-group')?.classList.remove('shadow-sm');
+        this.closest('.card')?.classList.remove('border');
+      });
+    });
+  });
+</script>
+
+<style>
+  /* Solo estilos mínimos que no se pueden lograr con clases de Bootstrap */
+  body {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e8f0fe 100%);
+    min-height: 100vh;
+  }
+  
+  .card {
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+  
+  /* Efecto de hover en tarjetas */
+  .card {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 3rem rgba(26, 59, 104, 0.175) !important;
+  }
+  
+  /* Un toque de color para el botón de envío */
+  #submitBtn {
+    transition: all 0.3s !important;
+  }
+  
+  #submitBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(74, 122, 188, 0.4) !important;
+  }
+  
+  #submitBtn:active {
+    transform: translateY(0);
+  }
+  
+  /* Asegurar visibilidad del título */
+  .card-header {
+    padding: 1rem 1.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.3rem;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  }
+</style>
+{% endblock %}
