@@ -1,0 +1,16 @@
+{% extends 'publico/base.html' %}
+{% block content %}
+  <h2>Bienvenido/a, {{ tutor.0 }} {{ tutor.1 }}</h2>
+  <p>Correo: {{ tutor.2 }}</p>
+
+  <h3>Estudiantes a tu cargo:</h3>
+  <ul>
+    {% for estudiante in estudiantes %}
+      <li>{{ estudiante.0 }} {{ estudiante.1 }}</li>
+    {% empty %}
+      <li>No tienes estudiantes asignados.</li>
+    {% endfor %}
+  </ul>
+
+  <p>Próximamente podrás solicitar permisos o ver el estado académico.</p>
+{% endblock %}
