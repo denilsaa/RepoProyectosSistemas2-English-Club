@@ -1,0 +1,27 @@
+# Evitar entorno virtual
+venv/
+.env
+
+# Archivos de Python compilados
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Archivos temporales de editores
+*.log
+*.pot
+*.pyc
+*.swp
+*.swo
+*~
+
+# Archivos de VSCode u otros IDEs
+.vscode/
+.idea/
+
+# Archivos de base de datos temporales
+*.db
+db.sqlite3
+
+# Archivos de migraciones innecesarios (opcionales)
+*/migrations/__pycache__/

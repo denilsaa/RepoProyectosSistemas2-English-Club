@@ -1,0 +1,137 @@
+{% extends 'publico/base.html' %}
+
+{% block title %}Dashboard Directivo{% endblock %}
+
+{% block content %}
+<section class="px-6 md:px-12 py-12 bg-gray-50 min-h-screen">
+  <div class="mb-10">
+    <h2 class="text-4xl font-extrabold text-blue-900 mb-2">👋 Bienvenido/a, {{ nombre }}</h2>
+    <p class="text-gray-700 text-lg">
+      Este es tu panel de control como directivo del 
+      <span class="font-semibold text-blue-800">Instituto English Club</span>.
+    </p>
+  </div>
+
+  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    
+  
+
+    <!-- Tarjeta 4 -->
+    <div class="bg-white border border-blue-100 rounded-2xl shadow-md hover:shadow-lg transition p-6 flex flex-col justify-between">
+      <div>
+        <h3 class="text-xl font-bold text-blue-800 mb-2">🎓 Registrar Estudiante Técnico</h3>
+        <p class="text-gray-600 text-sm">Formulario para mayores de edad.</p>
+      </div>
+<a href="{% url 'registrar_estudiante_tecnico' %}" class="mt-6 text-sm font-semibold text-blue-600 hover:underline transition">Registrar →</a>
+    </div>
+
+<!-- Tarjeta 5 -->
+<div class="bg-white border border-blue-100 rounded-2xl shadow-md hover:shadow-lg transition p-6 flex flex-col justify-between">
+  <div>
+    <h3 class="text-xl font-bold text-blue-800 mb-2">👦 Registrar Estudiante Regular</h3>
+    <p class="text-gray-600 text-sm">Formulario para menores y tutor.</p>
+  </div>
+  <a href="{% url 'registrar_estudiante_regular' %}" class="mt-6 text-sm font-semibold text-blue-600 hover:underline transition">Registrar →</a>
+</div>
+
+
+    <!-- Tarjeta 6 -->
+<div class="bg-white border border-blue-100 rounded-2xl shadow-md hover:shadow-lg transition p-6 flex flex-col justify-between">
+  <div>
+    <h3 class="text-xl font-bold text-blue-800 mb-2">🧑‍💼 Registrar Administrativo</h3>
+    <p class="text-gray-600 text-sm">Registro de nuevos directivos, docentes o secretarias.</p>
+  </div>
+<a href="{% url 'registrar_administrativo' %}" class="mt-6 text-sm font-semibold text-blue-600 hover:underline transition">
+  Registrar →
+</a>
+
+</div>
+
+<!-- Tarjeta Gestión de Cursos -->
+<div class="bg-white border border-blue-100 rounded-2xl shadow-md hover:shadow-lg transition p-6 flex flex-col justify-between">
+  <div>
+    <h3 class="text-xl font-bold text-blue-800 mb-2">🏫 Gestión de Cursos</h3>
+    <p class="text-gray-600 text-sm">Crear, editar y asignar docentes a cursos.</p>
+  </div>
+  <a href="{% url 'listar_cursos' %}" class="mt-6 text-sm font-semibold text-blue-600 hover:underline transition">
+    Ver cursos →
+  </a>
+</div>
+
+<!-- Tarjeta Ver Personal Administrativo -->
+<div class="bg-white border border-blue-100 rounded-2xl shadow-md hover:shadow-lg transition p-6 flex flex-col justify-between">
+  <div>
+    <h3 class="text-xl font-bold text-blue-800 mb-2">📋 Ver Personal Administrativo</h3>
+    <p class="text-gray-600 text-sm">Consulta todos los directivos, docentes y secretarias registrados.</p>
+  </div>
+  <a href="{% url 'listar_personal' %}" class="mt-6 text-sm font-semibold text-blue-600 hover:underline transition">
+    Ver lista →
+  </a>
+</div>
+<!-- Tarjeta Personal Inactivo -->
+<div class="bg-white border border-red-100 rounded-2xl shadow-md hover:shadow-lg transition p-6 flex flex-col justify-between">
+  <div>
+    <h3 class="text-xl font-bold text-red-800 mb-2">🗃 Personal Inactivo</h3>
+    <p class="text-gray-600 text-sm">Ver y reactivar personal desactivado.</p>
+  </div>
+  <a href="{% url 'listar_personal_inactivo' %}" class="mt-6 text-sm font-semibold text-red-600 hover:underline transition">
+    Ver lista →
+  </a>
+</div>
+
+<!-- Tarjeta Ver Estudiantes Técnicos -->
+<div class="bg-white border border-blue-100 rounded-2xl shadow-md hover:shadow-lg transition p-6 flex flex-col justify-between">
+  <div>
+    <h3 class="text-xl font-bold text-blue-800 mb-2">👨‍🎓 Estudiantes Técnicos</h3>
+    <p class="text-gray-600 text-sm">Consulta y gestiona los estudiantes técnicos registrados.</p>
+  </div>
+  <a href="{% url 'listar_tecnicos' %}" class="mt-6 text-sm font-semibold text-blue-600 hover:underline transition">
+    Ver lista →
+  </a>
+</div>
+
+<!-- Tarjeta Estudiantes Técnicos Inactivos -->
+<div class="bg-white border border-red-100 rounded-2xl shadow-md hover:shadow-lg transition p-6 flex flex-col justify-between">
+  <div>
+    <h3 class="text-xl font-bold text-red-800 mb-2">🗃 Técnicos Inactivos</h3>
+    <p class="text-gray-600 text-sm">Ver y reactivar estudiantes técnicos desactivados.</p>
+  </div>
+  <a href="{% url 'listar_tecnicos_inactivos' %}" class="mt-6 text-sm font-semibold text-red-600 hover:underline transition">
+    Ver lista →
+  </a>
+</div>
+<div class="bg-white border-red-100">
+
+ <!-- Tarjeta Ver Estudiantes Regulares -->
+<div class="bg-white border border-blue-100 rounded-2xl shadow-md hover:shadow-lg transition p-6 flex flex-col justify-between">
+  <div>
+    <h3 class="text-xl font-bold text-blue-800 mb-2">👧 Estudiantes Regulares</h3>
+    <p class="text-gray-600 text-sm">Consulta los estudiantes regulares y sus tutores.</p>
+  </div>
+  <a href="{% url 'listar_regulares' %}" class="mt-6 text-sm font-semibold text-blue-600 hover:underline transition">
+    Ver lista →
+  </a>
+</div>
+ <!-- Tarjeta Estudiantes Regulares Inactivos -->
+<div class="bg-white border border-red-100 rounded-2xl shadow-md hover:shadow-lg transition p-6 flex flex-col justify-between">
+  <div>
+    <h3 class="text-xl font-bold text-red-800 mb-2">🗃 Regulares Inactivos</h3>
+    <p class="text-gray-600 text-sm">Ver y reactivar estudiantes regulares desactivados.</p>
+  </div>
+  <a href="{% url 'listar_regulares_inactivos' %}" class="mt-6 text-sm font-semibold text-red-600 hover:underline transition">
+    Ver lista →
+  </a>
+</div>
+
+</div>  
+
+  </div>
+
+  <!-- Botón cerrar sesión -->
+  <div class="mt-12 text-center">
+    <a href="{% url 'logout' %}" class="text-red-600 font-medium text-sm hover:underline">
+      🔓 Cerrar sesión
+    </a>
+  </div>
+</section>
+{% endblock %}
