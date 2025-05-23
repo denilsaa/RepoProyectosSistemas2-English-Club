@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from apps.usuarios.models.usuario import Usuario
@@ -7,6 +8,9 @@ from apps.estudiantes.models.estudiante import Estudiante
 from django.contrib.auth import authenticate, login
 import hashlib
 
+=======
+from django.shortcuts import render
+>>>>>>> 3d4f397a324450a04a362f7d9feb23d25a1b81ea
 
 def inicio(request):
     return render(request, 'publico/inicio.html')
@@ -19,6 +23,7 @@ def servicios(request):
 
 def contacto(request):
     return render(request, 'publico/contacto.html')
+<<<<<<< HEAD
 
 def login_view(request):
     if request.method == 'POST':
@@ -55,3 +60,5 @@ def logout_view(request):
     request.session.flush()
     messages.success(request, "Sesión cerrada correctamente.")
     return redirect('login')
+=======
+>>>>>>> 3d4f397a324450a04a362f7d9feb23d25a1b81ea

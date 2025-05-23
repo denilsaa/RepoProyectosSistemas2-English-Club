@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 Django settings for config project.
 
@@ -29,13 +30,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%wwab50a9ek9m$=17eneo89j^8t44x92ctdy@ppwi!m5#obrju'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+=======
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SECRET_KEY = 'django-insecure-szt(26&cmzc011qr-0raq!0tm0#d-n&sp31urxs3^_hdyc+t(6'
+
+>>>>>>> 3d4f397a324450a04a362f7d9feb23d25a1b81ea
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
+<<<<<<< HEAD
 
 # Application definition
 
+=======
+>>>>>>> 3d4f397a324450a04a362f7d9feb23d25a1b81ea
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'django_extensions',
     # Apps personalizadas
     'apps.usuarios',
@@ -53,6 +66,21 @@ INSTALLED_APPS = [
     'apps.publicaciones',
     'apps.vark',
     'apps.publico',    
+=======
+    'widget_tweaks',  
+    'apps.usuarios',
+    'apps.estudiantes',
+    'apps.tutores',
+    'apps.docentes',
+    'apps.secretarias',
+    'apps.directivos',
+    'apps.asignaturas',
+    'apps.inscripciones',
+    'apps.notas',
+    'apps.asistencia',
+    'apps.vark',
+    'apps.publico',
+>>>>>>> 3d4f397a324450a04a362f7d9feb23d25a1b81ea
 ]
 
 
@@ -71,12 +99,16 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [
     BASE_DIR / 'apps' / 'usuarios' / 'templates',
     BASE_DIR / 'apps' / 'publico' / 'templates',
     BASE_DIR / 'apps' / 'estudiantes' / 'templates',
 ],
 
+=======
+        'DIRS': [BASE_DIR / 'apps' / 'publico' / 'templates'],
+>>>>>>> 3d4f397a324450a04a362f7d9feb23d25a1b81ea
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,6 +122,7 @@ TEMPLATES = [
 ]
 
 
+<<<<<<< HEAD
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -109,16 +142,78 @@ DATABASES = {
             'driver': os.getenv('DB_DRIVER'),
             'trusted_connection': 'yes',
             'extra_params': 'TrustServerCertificate=yes;'
+=======
+WSGI_APPLICATION = 'config.wsgi.application'
+
+
+
+""""
+DATABASES = {
+    'default': {
+        'ENGINE': 'mssql',
+        'NAME': 'englishclub',
+        'HOST': 'DENIL\\SQLEXPRESS',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+            'trusted_connection': 'yes',
+        },
+    }
+}
+"""
+
+#BASE DE DATOS DE AILYN
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'mssql',
+        'NAME': 'englishclub',
+        'HOST': 'DESKTOP-RI7UI8N\\SQLEXPRESS',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+            'trusted_connection': 'yes',
+        },
+    }
+}
+"""
+
+#BASE DE DATOS MARIOLY
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'mssql',
+        'NAME': 'englishclub',
+        'HOST': 'LAPTOP-M4R1\\SQLEXPRESS',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+            'trusted_connection': 'yes',
+>>>>>>> 3d4f397a324450a04a362f7d9feb23d25a1b81ea
         },
     }
 }
 
 
+<<<<<<< HEAD
 
 
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+=======
+#BASE DE DATOS DE LIMBER
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'mssql',
+        'NAME': 'englishclub',
+        'HOST': 'LINO\\SQLEXPRESS',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+            'trusted_connection': 'yes',
+        },
+    }
+}
+"""
+>>>>>>> 3d4f397a324450a04a362f7d9feb23d25a1b81ea
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -135,6 +230,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+<<<<<<< HEAD
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -162,3 +258,21 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+=======
+LANGUAGE_CODE = 'es-bo'
+
+TIME_ZONE = 'America/La_Paz'
+
+USE_I18N = True
+USE_TZ = True
+
+STATIC_URL = 'static/'
+
+# es para manejar archivos estaticos como esta en la raiz static importante no borrar
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+>>>>>>> 3d4f397a324450a04a362f7d9feb23d25a1b81ea
